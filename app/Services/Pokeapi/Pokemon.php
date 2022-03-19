@@ -145,7 +145,7 @@ class Pokemon
         $finalTypes = [];
 
         foreach($generalTypes as $types) {
-            $finalTypes[] = $types['type']['name'];
+            $finalTypes[] = ucfirst($types['type']['name']);
         }
 
         $this->types = $finalTypes;
@@ -186,5 +186,15 @@ class Pokemon
 
         $this->images = $finalImages;
         return $this;
+    }
+
+    /**
+     * Get an shiny image.
+     * 
+     * @return string
+     */
+    public function getShinyImage() : string
+    {
+        return $this->getImages()['other']['home']['front_shiny'];
     }
 }
