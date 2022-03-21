@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Pokemon;
 
+use App\Services\Pokeapi\Images;
 use Illuminate\View\Component;
 
 class SimplifiedInformationBox extends Component
@@ -15,7 +16,7 @@ class SimplifiedInformationBox extends Component
         public int $id, 
         public string $name, 
         public string|array $types,
-        public string $image
+        public Images $image
     ) {
     }
 

@@ -22,7 +22,7 @@ class Pokemon
     protected array $stats = [];
 
     /** @var $images */
-    protected array $images = [];
+    protected Images $images;
 
     /**
      * Initialize the pokemon.
@@ -93,9 +93,9 @@ class Pokemon
     /**
      * Returns the current instance images.
      * 
-     * @return array
+     * @return Images
      */
-    public function getImages() : array
+    public function getImages() : Images
     {
         return $this->images;
     }
@@ -144,8 +144,8 @@ class Pokemon
         $generalTypes = $this->getPokemon()['types'];
         $finalTypes = [];
 
-        foreach($generalTypes as $types) {
-            $finalTypes[] = ucfirst($types['type']['name']);
+        foreach($generalTypes as $type) {
+            $finalTypes[] = new Types($type['type']['name']);
         }
 
         $this->types = $finalTypes;
@@ -178,23 +178,7 @@ class Pokemon
     public function setImages() : Pokemon
     {
         $generalImages = $this->getPokemon()['sprites'];
-        $finalImages = [];
-
-        foreach($generalImages as $key => $image) {
-            $finalImages[$key] = $image;
-        }
-
-        $this->images = $finalImages;
+        $this->images = new Images($generalImages);
         return $this;
-    }
-
-    /**
-     * Get an shiny image.
-     * 
-     * @return string
-     */
-    public function getShinyImage() : string
-    {
-        return $this->getImages()['other']['home']['front_shiny'];
     }
 }
