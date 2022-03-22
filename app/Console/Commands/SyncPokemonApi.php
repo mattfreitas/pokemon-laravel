@@ -47,9 +47,7 @@ class SyncPokemonApi extends Command
     {
         $this->info('Storing in cache for '. $this->cache_time .' days...');
 
-        $daysToSeconds = $this->cache_time * 24 * 60 * 60;
-
-        $list = Cache::remember('pokemonList', $daysToSeconds, function () {
+        $list = Cache::remember('pokemonList', $this->cache_time * 24 * 60 * 60, function () {
             $pokemonsList = $this->pokeapiService->get('/pokemon', params: [ 'limit' => 1200 ]);
             return $pokemonsList;
         });
@@ -68,18 +66,31 @@ class SyncPokemonApi extends Command
      */
     public function transformResults(collection $results) : array|collection
     {
-        $results = $results->map(function($result) {
+        $results = $results->map(function($result) : Pokemon {
             $this->info('Caching pokemon '. $result['name'] .'.');
+
+            $id = $this->getIdFromString($result['url']);
 
             return new Pokemon(
                 collect($this->pokeapiService->getPokemon(
-                    id: $result['id'],
-                    name: $result['name'],
-                    return_results_without_instance: true
+                    id: $id,
+                    instance: true
                 ))
             );
         });
 
         return $results;
+    }
+
+    /**
+     * Returns an ID using RegEx from URL string.
+     * 
+     * @param string $url
+     * @return int
+     */
+    public function getIdFromString(string $url)
+    {
+        preg_match('/\/(\d+)\//', $url, $matches);
+        return $matches[1];
     }
 }

@@ -177,8 +177,7 @@ class Pokemon
      */
     public function setImages() : Pokemon
     {
-        $generalImages = $this->getPokemon()['sprites'];
-        $this->images = new Images($generalImages);
+        $this->images = new Images($this->getPokemon()['sprites']);
         return $this;
     }
 }
