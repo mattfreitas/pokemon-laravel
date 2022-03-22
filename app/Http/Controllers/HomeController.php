@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Pokeapi\PokeapiService;
 use Illuminate\Http\Request;
+use App\Services\Pokeapi\PokeapiService;
 
 class HomeController extends Controller
 {

@@ -2,7 +2,7 @@
 
 namespace App\View\Components\Pokemon;
 
-use App\Services\Pokeapi\Images;
+use App\Services\Pokeapi\Pokemon\Images;
 use Illuminate\View\Component;
 
 class SimplifiedInformationBox extends Component

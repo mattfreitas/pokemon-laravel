@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Pokeapi;
+namespace App\Services\Pokeapi\Pokemon;
 
 use Illuminate\Support\Collection;
 

@@ -1,20 +1,20 @@
 <nav class="bg-blue-700 w-full pb-24 relative flex flex-col justify-center px-10 md:px-0 items-center">
-    <div class="w-full mb-14">
-        <div class="container mx-auto flex items-center justify-between py-6 border-b border-blue-600">
-            <span class="font-bold text-white">PokeLaravel</span>
+    <div class="w-full mb-14 border-b border-blue-600">
+        <div class="container mx-auto flex md:flex-row flex-col items-center justify-between py-6">
+            <span class="font-bold text-white md:mb-0 mb-3">PokeLaravel</span>
 
-            <ul class="flex space-x-5 font-semibold">
+            <ul class="w-full md:w-auto rounded md:rounded-none flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-7 text-center md:text-left font-semibold py-4 md:py-0 border border-blue-600 md:border-0">
                 <li><a href="#" class="text-white hover:text-blue-100">List</a></li>
-                <li><a href="#" class="text-white hover:text-blue-100">API</a></li>
+                <li><a href="#" class="text-white hover:text-blue-100">API & Documentation</a></li>
                 <li><a href="#" class="text-white hover:text-blue-100">Contact</a></li>
             </ul>
 
-            <div>
-                <a href="#" class="flex space-x-1 items-center border border-blue-600 hover:border-blue-400 transition duration-400 px-5 py-1 rounded text-white font-semibold">
+            <div class="w-full md:w-auto md:pt-0 pt-3">
+                <a href="#" class="w-full md:w-auto justify-center flex space-x-1 items-center border border-blue-600 hover:border-blue-400 transition duration-400 px-5 py-1 rounded text-white font-semibold">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                     </svg>
-                    <span>My Pokedex</span>
+                    <span>My Pokedex (0)</span>
                 </a>
             </div>
         </div>

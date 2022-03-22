@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Pokeapi;
+namespace App\Services\Pokeapi\Pokemon;
 
 class Images
 {

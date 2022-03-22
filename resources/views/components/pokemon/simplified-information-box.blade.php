@@ -12,7 +12,7 @@
 
         <div class="flex flex-col space-y-1">
             @foreach($types as $type)
-                <span class="bg-gray-50 hover:bg-gray-100 text-{{ $type->getColor() }}-400 cursor-pointer px-4 py-2 rounded-full text-sm font-medium">{{ ucfirst($type->getName()) }}</span>
+                <span class="transition duration-200 bg-gray-50 hover:shadow-inner hover:bg-gray-100 text-{{ $type->getColor() }}-400 cursor-pointer px-4 py-2 rounded-full text-sm font-medium">{{ ucfirst($type->getName()) }}</span>
             @endforeach
         </div>
     </div>

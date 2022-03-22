@@ -1,22 +1,23 @@
 <?php
 
-namespace App\Services\Pokeapi;
+namespace App\Services\Pokeapi\Pokemon;
 
 class Types
 {
     /** @var $color */
     protected ?string $color = null;
 
+    /** @var $types */
+    protected array $types = [];
+
     /**
-     * Initialize the types. Please note that since PHP 8.0, the constructor is
-     * setting $name as instance variable so it's not needed to put in the top of the class
-     * or set in the constructor.
+     * Initialize the types.
      * 
      * @param string $name
      */
     public function __construct(protected string $name) {
         $this->color = $this->attributeToColor($name);
-    }
+     }
 
     /**
      * Get the name of the type.
@@ -47,27 +48,27 @@ class Types
     public function attributeToColor($attribute)
     {
         return match($attribute) {
-            'grass' => 'green',
-            'fire' => 'red',
-            'water' => 'blue',
-            'bug' => 'yellow',
-            'poison' => 'purple',
-            'normal' => 'gray',
-            'flying' => 'orange',
+            'grass'    => 'green',
+            'fire'     => 'red',
+            'water'    => 'blue',
+            'bug'      => 'yellow',
+            'poison'   => 'purple',
+            'normal'   => 'gray',
+            'flying'   => 'orange',
             'electric' => 'yellow',
-            'ground' => 'brown',
-            'fairy' => 'pink',
+            'ground'   => 'brown',
+            'fairy'    => 'pink',
             'fighting' => 'red',
-            'psychic' => 'purple',
-            'rock' => 'brown',
-            'ghost' => 'gray',
-            'steel' => 'gray',
-            'ice' => 'blue',
-            'dragon' => 'red',
-            'dark' => 'purple',
-            'unknown' => 'gray',
-            'shadow' => 'gray',
-            default => 'gray',
+            'psychic'  => 'purple',
+            'rock'     => 'brown',
+            'ghost'    => 'gray',
+            'steel'    => 'gray',
+            'ice'      => 'blue',
+            'dragon'   => 'red',
+            'dark'     => 'purple',
+            'unknown'  => 'gray',
+            'shadow'   => 'gray',
+            default    => 'gray',
         };
     }
 }

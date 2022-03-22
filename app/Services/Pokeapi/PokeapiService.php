@@ -2,8 +2,8 @@
 
 namespace App\Services\Pokeapi;
 use App\Services\RequestService;
-use App\Services\Pokeapi\Pokemon;
 use Illuminate\Support\Collection;
+use App\Services\Pokeapi\Pokemon\Pokemon;
 
 class PokeapiService extends RequestService
 {
@@ -62,7 +62,7 @@ class PokeapiService extends RequestService
      * Get a pokemon by id, it can be a string or a id (integer).
      * 
      * @param int|string $id
-     * @return Pokemon
+     * @return Pokemon|Collection
      */
     public function getPokemon(int|string $id, bool $return_results_without_instance = false) : Pokemon|Collection
     {
@@ -79,7 +79,7 @@ class PokeapiService extends RequestService
      * Set a pokemon to the current instance.
      * 
      * @param array|collection $pokemon_data
-     * @return void
+     * @return Pokemon
      */
     public function setPokemon(array|collection $pokemon) : Pokemon
     {
