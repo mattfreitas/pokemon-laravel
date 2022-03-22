@@ -4,6 +4,7 @@ namespace App\Services\Pokeapi;
 use App\Services\RequestService;
 use Illuminate\Support\Collection;
 use App\Services\Pokeapi\Pokemon\Pokemon;
+use Illuminate\Support\Facades\Cache;
 
 class PokeapiService extends RequestService
 {
@@ -30,32 +31,32 @@ class PokeapiService extends RequestService
      */
     public function listPokemons(array $params = [], bool $should_transform_results = false) : array|collection
     {
-        $list = $this->get('/pokemon', $params);
-
-        if($should_transform_results) {
-            $list = $this->transformResults(collect($list['results']));
+        if(isset($params['search'])) {
+            $searchResult = new Pokemon(Cache::get('pokemon'. $params['search']));
+            return [ $searchResult ];
         }
 
+        $pokemonList = $this->get('pokemon', params: $params);
+        $list = $this->fillPokemonListWithDetails($pokemonList->toArray());
+        
         return $list;
     }
 
     /**
-     * Transform the results into a Pokemon object.
+     * Fills the pokemon list with details from cache layer.
      * 
-     * @param array|collection $results
+     * @param array $list
+     * @return array
      */
-    public function transformResults(array|collection $results) : array|collection
+    private function fillPokemonListWithDetails(array $list) : array
     {
-        $results = $results->map(function($result) {
-            return new Pokemon(
-                collect($this->getPokemon(
-                    id: $result['name'],
-                    return_results_without_instance: true
-                ))
-            );
-        });
+        $pokemonList = [];
 
-        return $results;
+        foreach ($list['results'] as $pokemon) {
+            $pokemonList[] = $this->getPokemon($pokemon['name']);
+        }
+
+        return $pokemonList;
     }
 
     /**
@@ -66,7 +67,14 @@ class PokeapiService extends RequestService
      */
     public function getPokemon(int|string $id, bool $return_results_without_instance = false) : Pokemon|Collection
     {
-        $pokemon = $this->get('/pokemon/' . $id);
+        $pokemon = Cache::remember('pokemon'. $id, 60 * 24 * 60 * 60, function () use ($id) {
+            $getPokemonData = $this->get('/pokemon/'. $id);
+
+            // Also add a cache by name
+            Cache::add('pokemon'. $getPokemonData['name'], $getPokemonData, 60 * 24 * 60 * 60);
+
+            return $getPokemonData;
+        });
 
         if($return_results_without_instance) {
             return $pokemon;

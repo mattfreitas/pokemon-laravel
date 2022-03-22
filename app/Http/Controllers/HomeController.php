@@ -17,7 +17,8 @@ class HomeController extends Controller
     {
         return view('home', [
             'pokemons' => $pokeapi->listPokemons(
-                should_transform_results: true
+                should_transform_results: true,
+                params: array_merge([ 'limit' => 20 ], $request->query())
             )
         ]);
     }

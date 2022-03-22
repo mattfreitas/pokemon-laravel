@@ -14,21 +14,34 @@ class Images
     public function __construct(protected array $images) { }
 
     /**
+     * Returns the default image.
+     * 
+     * @return string|null
+     */
+    public function defaultImage() : ?string
+    {
+        return $this->images['front_default'];
+    }
+    /**
      * Returns a shiny image.
      * 
-     * @return string
+     * @return string|null
      */
-    public function getShinyImage() : string
+    public function getShinyImage() : ?string
     {
+        if(!$this->images['other']['home']['front_shiny']) {
+            return $this->defaultImage();
+        }
+        
         return $this->images['other']['home']['front_shiny'];
     }
 
     /**
      * Returns a 2d image.
      * 
-     * @return string
+     * @return string|null
      */
-    public function get2dImage() : string
+    public function get2dImage() : ?string
     {
         return $this->images['other']['dream_world']['front_default'];
     }
