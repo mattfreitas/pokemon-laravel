@@ -32,7 +32,7 @@ class PokeapiService extends RequestService
     {
         abort_if(!Cache::get('pokemonList'), 501, 'Pokemons are not cached. Please, sync the application.');
 
-        if(request()->filled('search')) {
+        if(request()->filled('search') && Cache::get('pokemon'. strtolower(request('search')))) {
             $searchResult = new Pokemon(Cache::get('pokemon'. strtolower(request('search'))));
             return [ $searchResult ];
         }
